@@ -22,13 +22,16 @@
 
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import EditEventPage from "./pages/EditEventPage";
-import EventDetailPage, {loader as eventDetailLoader} from "./pages/EventsDetailsPage";
+import EventDetailPage, {loader as eventDetailLoader, action as deleteAction} from "./pages/EventsDetailsPage";
 import EventsPage, {loader} from "./pages/EventsPage";
 import HomePage from "./pages/HomePage";
-import NewEventPage, {action as sendEventAction} from "./pages/NewEventPage";
+import NewEventPage from "./pages/NewEventPage";
 import Layout from "./pages/Layout";
 import EventsLayout from "./pages/EventsLayout";
 import ErrorPage from "./components/error";
+import {action as newOrUpdateAction} from "./components/EventForm"
+import NewsletterPage from "./components/Newsletter";
+import {action as newsletterAction} from "./components/Newsletter"
 
 
 const routes = createBrowserRouter([{
@@ -48,15 +51,16 @@ const routes = createBrowserRouter([{
           id:"event-details",
           loader:eventDetailLoader,
           children:[
-            {index:true, element:<EventDetailPage />},
-            {path:"edit", element:<EditEventPage />}
+            {index:true, element:<EventDetailPage />, action:deleteAction},
+            {path:"edit", element:<EditEventPage />, action:newOrUpdateAction}
           ]
         },
-        {path:"new", element:<NewEventPage />, action:sendEventAction},
+        {path:"new", element:<NewEventPage />, action:newOrUpdateAction},
       ]
     },
+    {path:"newsletter", element:<NewsletterPage />, action:newsletterAction},
   ]
-}])
+}]);
 
 function App() {
   return <RouterProvider router = {routes}/>
