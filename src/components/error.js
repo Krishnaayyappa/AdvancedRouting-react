@@ -9,12 +9,10 @@ const ErrorPage = () => {
     let message = "Something went wrong"
     
     if (err.status === 500){
-        console.log("success")
         message=err.data.message
     }
 
     if (err.status === 404){
-        console.log("success")
         message =err.data.message
     }
 

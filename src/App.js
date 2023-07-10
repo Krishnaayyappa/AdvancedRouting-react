@@ -32,12 +32,17 @@ import ErrorPage from "./components/error";
 import {action as newOrUpdateAction} from "./components/EventForm"
 import NewsletterPage from "./components/Newsletter";
 import {action as newsletterAction} from "./components/Newsletter"
+import AuthenticationPage, {action as authAction} from "./pages/Authentication";
+import {deleteAuthAction} from "./pages/logout";
+import {tokenLoader, checkAuthLoader} from "./utils/auth";
 
 
 const routes = createBrowserRouter([{
   path:"/", 
   element:<Layout />,
   errorElement:<ErrorPage />,
+  id:"root",
+  loader:tokenLoader,
   children:[
     {index:true, element:<HomePage />},
     {
@@ -52,13 +57,15 @@ const routes = createBrowserRouter([{
           loader:eventDetailLoader,
           children:[
             {index:true, element:<EventDetailPage />, action:deleteAction},
-            {path:"edit", element:<EditEventPage />, action:newOrUpdateAction}
+            {path:"edit", element:<EditEventPage />, loader:checkAuthLoader, action:newOrUpdateAction}
           ]
         },
-        {path:"new", element:<NewEventPage />, action:newOrUpdateAction},
+        {path:"new", element:<NewEventPage />, loader:checkAuthLoader, action:newOrUpdateAction},
       ]
     },
     {path:"newsletter", element:<NewsletterPage />, action:newsletterAction},
+    {path:"auth", element:<AuthenticationPage />, action:authAction},
+    {path:"logout", action:deleteAuthAction}
   ]
 }]);
 
