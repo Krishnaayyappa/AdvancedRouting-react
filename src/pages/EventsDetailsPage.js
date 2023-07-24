@@ -12,7 +12,7 @@ const EventDetailPage = () => {
 
 export async function loader({request, params}){
     const id = params.eventId
-    const response = await fetch("https://rest-api-express-js-nine.vercel.app/" + id)
+    const response = await fetch("https://rest-api-express-js-nine.vercel.app/events/" + id)
     if(!response.ok){
         throw json({message:"Unable to fetch the event details"}, {status:500})
     }else {
@@ -23,7 +23,7 @@ export async function loader({request, params}){
 export async function action({request, params}){
     const eventId = params.eventId
     const token = getAuthToken();
-    const response = await fetch("https://rest-api-express-js-nine.vercel.app/" + eventId, {
+    const response = await fetch("https://rest-api-express-js-nine.vercel.app/events/" + eventId, {
         method: request.method,
         headers:{
             "Authorization":"Bearer " + token      
