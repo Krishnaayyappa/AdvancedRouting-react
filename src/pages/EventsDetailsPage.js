@@ -6,13 +6,13 @@ import EventItem from "../components/EventItem"
 const EventDetailPage = () => {
     const data = useRouteLoaderData('event-details')
     return (
-        <EventItem event = {data.event}/>
+        <EventItem event = {data.event[0]}/>
     )
 }
 
 export async function loader({request, params}){
     const id = params.eventId
-    const response = await fetch("http://localhost:8080/events/" + id)
+    const response = await fetch("https://rest-api-express-js-nine.vercel.app/" + id)
     if(!response.ok){
         throw json({message:"Unable to fetch the event details"}, {status:500})
     }else {
@@ -23,7 +23,7 @@ export async function loader({request, params}){
 export async function action({request, params}){
     const eventId = params.eventId
     const token = getAuthToken();
-    const response = await fetch("http://localhost:8080/events/" + eventId, {
+    const response = await fetch("https://rest-api-express-js-nine.vercel.app/" + eventId, {
         method: request.method,
         headers:{
             "Authorization":"Bearer " + token      

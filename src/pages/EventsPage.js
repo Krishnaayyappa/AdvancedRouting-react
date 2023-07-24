@@ -20,7 +20,7 @@ const EventsPage = () => {
 }
 
 export async function loaderEvents(){
-    const response = await fetch("http://localhost:8080/events");
+    const response = await fetch("https://rest-api-express-js-nine.vercel.app/events");
     if (!response.ok){
         throw json({message:"Unable to fetch the data"}, {status:500});
     }else {

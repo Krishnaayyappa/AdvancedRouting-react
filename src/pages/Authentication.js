@@ -2,14 +2,12 @@ import { redirect, json } from 'react-router-dom';
 import AuthForm from '../components/AuthForm';
 
 function AuthenticationPage() {
-    console.log("checkpointo")
   return <AuthForm />;
 }
 
 export default AuthenticationPage;
 
 export async function action({request}){
-    console.log("checkpoint1")
     const data = await request.formData();
     const email = data.get("email")
     const password = data.get("password")
@@ -18,6 +16,7 @@ export async function action({request}){
         password:password
     };
     
+
     const param = new URL(request.url).searchParams
     const mode = param.get("mode") || 'login';
     
@@ -26,7 +25,7 @@ export async function action({request}){
         throw json({message:'unsupported mode'}, {status:422});
     }
     
-    const response = await fetch("http://localhost:8080/" + mode, {
+    const response = await fetch("https://rest-api-express-js-nine.vercel.app/" + mode, {
         method:"POST",
         headers: {
             "Content-Type":"application/json"

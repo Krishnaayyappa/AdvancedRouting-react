@@ -56,11 +56,11 @@ export async function action({request, params}){
 
   const method = request.method
 
-  let url = "http://localhost:8080/events";
+  let url = "https://rest-api-express-js-nine.vercel.app/events";
 
   if(method === "PATCH"){
     const eventId = params.eventId;
-    url = "http://localhost:8080/events/" + eventId;
+    url = "https://rest-api-express-js-nine.vercel.app/events/" + eventId;
   }
 
   const response = await fetch(url, {
