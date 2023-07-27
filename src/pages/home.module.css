@@ -1,0 +1,16 @@
+
+
+.layout{
+    width: 60%;
+    margin: 15.5rem auto;
+    text-align: center;
+}
+
+.layout h1{
+    font-size: 5rem;
+    color: var(--color-primary-400);
+}
+
+.layout h2{
+    font-size: 2.5rem;
+}

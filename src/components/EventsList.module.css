@@ -25,6 +25,7 @@
 
 .item img {
   width: 33%;
+  height:7rem;
   object-fit: cover;
 }
 
